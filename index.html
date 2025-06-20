@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflection Hub | Where Stories Remember. Reflections Awaken.</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/strapi-client.js"></script>
+    <script src="js/main.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f5f2;
+            color: #3d3d3d;
+        }
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .hero-pattern {
+            background-image: url('images/hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(79, 51, 34, 0.7);
+        }
+        .btn-primary {
+            background-color: #8c6d46;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #6e5636;
+            transform: translateY(-2px);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .fabric-pattern {
+            background-image: url('data:image/png;base64,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');
+            background-size: 50px;
+            opacity: 0.05;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="w-full py-4 bg-white shadow-sm">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="text-2xl font-semibold">ECHOES IN AFRICA</div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="text-gray-700 hover:text-amber-800 transition">Home</a>
+                <a href="#featured-reflection" class="text-gray-700 hover:text-amber-800 transition">Stories</a>
+                <a href="#reflections" class="text-gray-700 hover:text-amber-800 transition">Reflections</a>
+                <a href="#community" class="text-gray-700 hover:text-amber-800 transition">Community</a>
+                <a href="#stay-connected" class="text-gray-700 hover:text-amber-800 transition">Contact</a>
+            </nav>
+            <button class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern relative">
+        <div class="fabric-pattern absolute inset-0"></div>
+        <div class="container mx-auto px-6 py-24 md:py-32 text-center relative z-10">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-semibold mb-4 text-white leading-tight">ENTER THE CIRCLE OF WISDOM</h1>
+                <p class="text-xl md:text-2xl text-amber-100 mb-8">Stories. Sounds. Stillness. A journey home to self.</p>
+                <a href="#welcome" class="inline-block btn-primary text-white px-8 py-3 rounded-md text-lg font-medium transition">BEGIN REFLECTION</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Welcome Message -->
+    <section id="welcome" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl text-center font-medium mb-12">Welcome Message / About the Hub</h2>
+            <div class="max-w-2xl mx-auto p-8 border border-amber-200 rounded-lg text-center bg-amber-50">
+                <p class="text-lg md:text-xl italic mb-6">
+                    The Reflection Hub is not a place—it's a pause. A doorway back to the sacred within. 
+                    Here, words walk, sounds stir, and silence speaks. In this digital sanctuary, 
+                    we reconnect with ancestral wisdom and awaken our inner knowing.
+                </p>
+                <a href="manifesto.html" class="btn-primary text-white px-6 py-2 rounded-md transition">READ OUR MANIFESTO</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Reflection of the Week -->
+    <section id="featured-reflection" class="py-12 md:py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl text-center font-medium mb-12">FEATURED REFLECTION OF THE WEEK</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12 featured-stories">
+                <!-- Content will be loaded dynamically from Strapi -->
+                <div class="text-center py-8">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-800 mx-auto"></div>
+                    <p class="mt-2 text-gray-600">Loading stories...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Split Section -->
+    <section id="reflections" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Featured Reflection -->
+                <div class="bg-amber-50 p-8 rounded-lg border border-amber-200">
+                    <h3 class="text-2xl font-medium mb-6 text-center">FEATURED REFLECTION OF THE WEEK</h3>
+                    <div class="flex vflex-col md:flex-row items-center mb-6">
+                        <div class="w-full md:w-1/2 h-60 bg-gray-200 mb-4 md:mb-0 md:mr-4 flex items-center justify-center">
+                            <img src="images/zebra-harmony.jpg" alt="The Zebra - Path of Inner Harmony" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <h4 class="text-xl font-medium mb-2">The Zebra – Path of Inner Harmony</h4>
+                            <p class="text-gray-700 mb-4">Visual or title of a current story or theme exploring the duality within us all and how to find balance in life's journey.</p>
+                            <a href="explore.html" class="btn-primary text-white px-6 py-2 rounded-md transition">EXPLORE NOW</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Community Feedback -->
+                <div id="community" class="flex flex-col">
+                    <div class="bg-gray-50 p-8 rounded-lg mb-8">
+                        <h3 class="text-2xl font-medium mb-6 text-center">COMMUNITY FEEDBACK OR "VOICES FROM THE FIRE"</h3>
+                        <div class="italic text-gray-700">
+                            <p class="mb-4">"The Reflection Hub has awakened parts of my soul I had forgotten existed. The stories speak directly to my heart."</p>
+                            <p class="text-right">— Aminata K., Lagos</p>
+                        </div>Make read story clickable and opens to another page for both , zebra path, savanna song cards
+                    </div>
+                    
+                    <!-- Journey Badges -->
+                    <div class="bg-gray-50 p-8 rounded-lg">
+                        <h3 class="text-2xl font-medium mb-4 text-center">JOURNEY BADGES</h3>
+                        <p class="text-center mb-6">Unlock badges as you listen, learn, and grow</p>
+                        <div class="flex items-                     <h3 class="text-2xl font-medium mb-4 text-center">JOURNEY BADGES</h3>
+                        <p class="text-center mb-6">Unlock badges as you listen, learn, and grow</p>
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4 flex items-center justify-center">
+                                <img src="images/wisdom-circle.jpg" alt="Badge" class="w-full h-full object-cover rounded-lg">
+                            </div>
+                            <div>center mb-6">
+                            <div class="w-16 h-16 bg-gray-200 rounded-lg mr-4 flex items-center justify-center">
+                                <img src="images/wisdom-circle.jpg" alt="Badge" class="w-full h-full object-cover rounded-lg">
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Example: Keeper of Wisdom</h4>
+                                <p class="text-sm text-gray-600">Awarded after completing 5 reflections</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <a href="begin-journey.html" class="btn-primary text-white px-6 py-2 rounded-md transition">BEGIN YOUR JOURNEY</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stay Connected -->
+    <section id="stay-connected" class="py-16 bg-amber-800 text-white">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-medium mb-6">STAY CONNECTED</h3>
+                    <p class="mb-6">Receive weekly reflections, audio stories & sacred whispers.</p>
+                    <form class="mb-6">
+                        <div class="mb-4">
+                            <input type="email" placeholder="Email Address" class="w-full p-3 rounded-md text-gray-800">
+                        </div>
+                        <button type="submit" class="bg-white text-amber-800 px-6 py-2 rounded-md font-medium hover:bg-gray-100 transition">Subscribe</button>
+                    </form>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-amber-800">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-amber-800">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-amber-800">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-amber-800">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <img src="images/savanna-sunset.jpg" alt="Stay Connected" class="w-full h-auto rounded-lg object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-medium mb-4">Reflection Hub</h4>
+                    <p class="text-gray-400">Where Stories Remember. Reflections Awaken.</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-medium mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Stories</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Reflections</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Community</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xwisdoml font-medium mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Cookie Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-medium mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>info@reflectionhub.com</li>
+                        <li>+234 803 456 7890</li>
+                        <li>Lagos, Nigeria</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500">
+                <p>Powered by Equity Premier / Echoes</p>
+                <p class="mt-2">© 2025 Reflection Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
